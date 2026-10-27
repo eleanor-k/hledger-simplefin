@@ -10,9 +10,7 @@ set -euo pipefail
 
 SIMPLEFIN_ACCESS_URL=$(secret-tool lookup service simplefin account me)
 
-date() { if hash gdate 2>/dev/null; then gdate "$@"; else date "$@"; fi }
-
-START=`date +%s -d '-30 days'`
+START=$(($(date +%s) - 30 * 86400))
 ACCTPARAM=${1:+&account=$1}
 
 curl -sL "$SIMPLEFIN_ACCESS_URL/accounts?start-date=$START$ACCTPARAM" | jq
