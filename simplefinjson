@@ -1,17 +1,14 @@
-#!/bin/bash
-# simplefinjson 1.1 - (c) Simon Michael 2025
-# simplefinjson [ACCTID]
-#  download the last 30 days' transaction history of one or all accounts from SimpleFIN, and print as tidy JSON.
+#!/usr/bin/env bash
 #
-# Requirements:
-#  a SimpleFIN account with financial institution(s) and app connection configured
-#  curl
-#  GNU date
-#  jq to prettify
+# simplefinjson - fetch transactions from SimpleFIN as JSON
+#
+# Copyright (c) 2025 Simon Michael (original)
+# Copyright (c) 2026 Eleanor Kelley (modifications)
+# SPDX-License-Identifier: GPL-3.0-or-later
 
-# Insert an access token here, acquired with simplefinsetup.
-# (Or use a secrets manager, like https://bitwarden.com/help/secrets-manager-quick-start.)
-SIMPLEFIN_ACCESS_URL=''
+set -euo pipefail
+
+SIMPLEFIN_ACCESS_URL=$(secret-tool lookup service simplefin account me)
 
 date() { if hash gdate 2>/dev/null; then gdate "$@"; else date "$@"; fi }
 
