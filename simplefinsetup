@@ -8,7 +8,7 @@
 
 set -euo pipefail
 
-read -s -p "SimpleFIN Setup Token: " SETUP_TOKEN
+read -rs -p "SimpleFIN Setup Token: " SETUP_TOKEN
 
 CLAIM_URL="$(echo "$SETUP_TOKEN" | base64 --decode)"
 printf "\nFetching URL...\n"
